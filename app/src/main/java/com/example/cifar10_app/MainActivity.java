@@ -22,8 +22,8 @@ public class MainActivity extends AppCompatActivity {
     static {
         System.loadLibrary("tensorflow_inference");
     }
-    //private static final String MODEL_FILE = "file:///android_asset/cifar10.pb";
-    private static final String MODEL_FILE = "file:///android_asset/ImageClassifier.h5";
+    private static final String MODEL_FILE = "file:///android_asset/cifar10.pb";
+//    private static final String MODEL_FILE = "file:///android_asset/ImageClassifier.h5";
 
     private static final String INPUT_NODE = "reshape_1_input";
 
@@ -110,22 +110,14 @@ public class MainActivity extends AppCompatActivity {
         };
         int maxIndex = 0;
         float max = 0;
-        int secondMaxIndex = 0;
-        float secondMax = 0;
         for (int i = 0; i < 10; i++) {
             if (resultsArray[i] > max) {
-                secondMax = max;
-                secondMaxIndex = maxIndex;
                 max = resultsArray[i];
                 maxIndex = i;
-            } else if (resultsArray[i] < max && resultsArray[i] > secondMax) {
-                secondMax = resultsArray[i];
-                secondMaxIndex = i;
             }
         }
         String answer = answers[maxIndex];
-        String secondAnswer = answers[secondMaxIndex];
-        resultsTextView.setText("Prediction: " + answer + "\nSecond prediction: " + secondAnswer);
+        resultsTextView.setText("Prediction: " + answer);
     }
 
 }
